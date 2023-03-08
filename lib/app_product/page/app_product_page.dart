@@ -32,7 +32,7 @@ class AppProductPage extends StatelessWidget {
           ),
           CustomTextField(
             controller: desc,
-            hintText: "Description",
+            hintText: "Descriptionnn",
           ),
           const SizedBox(
             height: 12,
