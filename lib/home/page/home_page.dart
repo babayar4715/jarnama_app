@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jarnama_app/app_product/app_product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +14,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("HomePage"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AppProductPage(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
