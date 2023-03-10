@@ -1,9 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:intl/intl.dart';
 
-import '../../components/custom_text_field.dart';
+import '../../components/image_container.dart';
 import '../../services/date_time_servise.dart';
+
+import '../../components/custom_text_field.dart';
 
 class AppProductPage extends StatelessWidget {
   const AppProductPage({Key? key}) : super(key: key);
@@ -17,6 +22,7 @@ class AppProductPage extends StatelessWidget {
     final userName = TextEditingController();
     final address = TextEditingController();
     final price = TextEditingController();
+    List<XFile> images = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +46,14 @@ class AppProductPage extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          Container(width: double.infinity, decoration: BoxDecoration()),
+          Imagecontainer(
+            images: images,
+            onPicked: (value) => images = value,
+            onDelete: (v) => images.remove(v),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
           CustomTextField(
             controller: dateTime,
             hintText: "DateTime",
