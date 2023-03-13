@@ -1,9 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:intl/intl.dart';
+import 'package:jarnama_app/loading_serivice.dart';
+import 'package:jarnama_app/model/product_model.dart';
+import 'package:jarnama_app/services/storages_service.dart';
+import 'package:jarnama_app/services/store_service.dart';
 
 import '../../components/image_container.dart';
 import '../../services/date_time_servise.dart';
@@ -97,7 +99,23 @@ class AppProductPage extends StatelessWidget {
             height: 12,
           ),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () async {
+              LoadingService().showLoading(context);
+              final urls = await StorageService().uploadImage(images);
+              final product = Product(
+                title: title.text,
+                description: desc.text,
+                dataTime: dateTime.text,
+                phoneNumber: phone.text,
+                userName: userName.text,
+                address: address.text,
+                images: urls,
+                prices: price.text,
+              );
+
+              await StoreService().saveProduct(product);
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
             icon: const Icon(Icons.publish),
             label: const Text('Add to FireStore'),
           ),
