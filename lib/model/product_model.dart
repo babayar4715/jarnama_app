@@ -6,7 +6,7 @@ class Product {
     this.images,
     required this.title,
     required this.description,
-    required this.dataTime,
+    required this.dateTime,
     required this.phoneNumber,
     required this.userName,
     required this.address,
@@ -15,7 +15,7 @@ class Product {
   final List<String>? images;
   final String title;
   final String description;
-  final String dataTime;
+  final String dateTime;
   final String phoneNumber;
   final String userName;
   final String address;
@@ -26,7 +26,7 @@ class Product {
       'images': images,
       'title': title,
       'description': description,
-      'dataTime': dataTime,
+      'dateTime': dateTime,
       'phoneNumber': phoneNumber,
       'userName': userName,
       'address': address,
@@ -41,7 +41,7 @@ class Product {
           : null,
       title: map['title'] as String,
       description: map['description'] as String,
-      dataTime: map['dataTime'] as String,
+      dateTime: map['dataTime'] as String,
       phoneNumber: map['phoneNumber'] as String,
       userName: map['userName'] as String,
       address: map['address'] as String,
