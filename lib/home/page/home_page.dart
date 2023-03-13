@@ -13,18 +13,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final db = FirebaseFirestore.instance;
 
-  Stream<QuerySnapshot> readToDos() {
-    return db.collection("products").snapshots();
+  Stream<QuerySnapshot> readTodos() {
+    return db.collection('products').snapshots();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("HomePage"),
+        title: const Text('HomePage'),
       ),
       body: StreamBuilder(
-        stream: readToDos(),
+        stream: readTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -45,37 +45,43 @@ class _HomePageState extends State<HomePage> {
                 final product = todos[index];
 
                 return Card(
-                    color: Colors.grey[200],
-                    child: Column(
-                      children: [
-                        product.images != null
-                            ? SizedBox(
-                                height: 200,
-                                child: PageView.builder(
-                                  itemCount: product.images!.length,
-                                  itemBuilder: (context, index) {
-                                    final image = product.images![index];
-                                    return Image.network(image);
-                                  },
-                                ),
-                              )
-                            : const SizedBox(
-                                height: 20,
+                  color: const Color.fromARGB(255, 159, 159, 159),
+                  child: Column(
+                    children: [
+                      product.images != null
+                          ? SizedBox(
+                              height: 200,
+                              child: PageView.builder(
+                                itemCount: product.images!.length,
+                                itemBuilder: (context, index) {
+                                  final image = product.images![index];
+                                  return Image.network(image);
+                                },
                               ),
-                        ListTile(
-                          title: Text(
-                            product.userName,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          leading: Text(product.title,
-                              style: TextStyle(fontSize: 20)),
-                          subtitle: Text(product.description,
-                              style: TextStyle(fontSize: 20)),
-                          trailing: Text(product.prices ?? "",
-                              style: TextStyle(fontSize: 20)),
+                            )
+                          : const SizedBox(),
+                      const SizedBox(height: 20),
+                      ListTile(
+                        title: Text(
+                          product.userName,
+                          style: const TextStyle(fontSize: 20),
                         ),
-                      ],
-                    ));
+                        leading: Text(
+                          product.title,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          product.description,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        trailing: Text(
+                          product.prices ?? '',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
             );
           } else {
@@ -88,7 +94,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AppProductPage(),
+              builder: (context) => AppProductPage(),
             ),
           );
         },
